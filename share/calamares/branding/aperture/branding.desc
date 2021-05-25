@@ -122,7 +122,7 @@ navigation: widget
 # are set to "true" (they can also be overridden).
 strings:
     productName:         "@{NAME}"
-    shortProductName:    Generic
+    shortProductName:    Aperture
     version:             2020.2 LTS
     shortVersion:        2020.2
     versionedName:       Aperture Linux
