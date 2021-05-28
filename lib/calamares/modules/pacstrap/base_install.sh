@@ -1,25 +1,5 @@
 #!/bin/bash
 
-PACSTRAP="/usr/bin/pacstrap_calamares"
-
-make_pacstrap_calamares() {
-    if [ -f "$PACSTRAP" ] ; then
-        return
-    fi
-    sed -e '/chroot_add_mount proc/d'			\
-        -e '/chroot_add_mount sys/d'			\
-        -e '/ignore_error chroot_maybe_add_mount/d'	\
-        -e '/chroot_add_mount udev/d'			\
-        -e '/chroot_add_mount devpts/d'			\
-        -e '/chroot_add_mount shm/d'			\
-        -e '/chroot_add_mount \/run/d'			\
-        -e '/chroot_add_mount tmp/d'			\
-        -e '/efivarfs \"/d'				\
-           /usr/bin/pacstrap > "$PACSTRAP"
-
-    chmod +x "$PACSTRAP"
-}
-
 update_db() {
     # Update database step by step
     # For iso only
@@ -55,13 +35,11 @@ setup() {
         n&&NR-n<2{sub("^# ?","")}
         {print}' /etc/pacman.conf
 
-    make_pacstrap_calamares
     update_db
 }
 
 run() {
     packages=(
-        # base
         base
         linux
         linux-firmware
@@ -77,7 +55,6 @@ run() {
 
     chrootpath=$(cat /tmp/chrootpath.txt)
     /usr/bin/mkdir -m 0755 -p "$chrootpath"/var/{cache/pacman/pkg,lib/pacman,log} "$chrootpath"/{dev,run,etc/pacman.d}
-
     /usr/bin/pacman -Sy --noconfirm --needed --root "$chrootpath" "${packages[@]}" --cachedir="$chrootpath/var/cache/pacman/pkg"
 
 
