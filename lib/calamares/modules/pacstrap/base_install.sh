@@ -53,7 +53,7 @@ update_db() {
 setup() {
     gawk -i inplace '/^# ?\[multilib\]$/{n=NR}
         n&&NR-n<2{sub("^# ?","")}
-        {print}' ./pacman.conf 
+        {print}' /etc/pacman.conf
 
     make_pacstrap_calamares
     update_db
@@ -72,51 +72,20 @@ run() {
         device-mapper
         aperture-mirrorlist
         glados-keyring
-
-        # important utils
-        sudo
-        base-devel
-        xterm
-        diffutils
-        inetutils
-        less
-        man-db
-        man-pages
-        usbutils
-
-        # file system utils
-        cryptsetup
-        e2fsprogs
-        f2fs-tools
-        btrfs-progs
-        lvm2
-        reiserfsprogs
-        xfsprogs
-        jfsutils
-        mkinitcpio-nfs-utils
-        sysfsutils
-        mdadm
-
-        # editors
-        vim
-        neovim
-        nano
-
-        # candy
-        aperture-neofetch
-        perl
     )
 
 
     chrootpath=$(cat /tmp/chrootpath.txt)
-#     "$PACSTRAP" "$chrootpath" "${packages[@]}"
-    pacman -Sy --noconfirm --needed --root "$chrootpath" "${packages[@]}"
+    /usr/bin/mkdir -m 0755 -p "$chrootpath"/var/{cache/pacman/pkg,lib/pacman,log} "$chrootpath"/{dev,run,etc/pacman.d}
+
+    /usr/bin/pacman -Sy --noconfirm --needed --root "$chrootpath" "${packages[@]}" --cachedir="$chrootpath/var/cache/pacman/pkg"
+
 
     rsync -vaRI					\
         /usr/bin/chrooted_cleaner_script.sh	\
         /usr/bin/cleaner_script.sh		\
         /etc/pacman.conf			\
-        /etc/pacman.d/mirrorlist		\
+        /etc/pacman.d		\
         /tmp/run_once				\
         /etc/default/grub			\
         "$chrootpath"
