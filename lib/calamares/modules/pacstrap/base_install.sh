@@ -51,6 +51,10 @@ update_db() {
 }
 
 setup() {
+    gawk -i inplace '/^# ?\[multilib\]$/{n=NR}
+        n&&NR-n<2{sub("^# ?","")}
+        {print}' ./pacman.conf 
+
     make_pacstrap_calamares
     update_db
 }
@@ -103,8 +107,10 @@ run() {
         perl
     )
 
+
     chrootpath=$(cat /tmp/chrootpath.txt)
-    "$PACSTRAP" "$chrootpath" "${packages[@]}"
+#     "$PACSTRAP" "$chrootpath" "${packages[@]}"
+    pacman -Sy --noconfirm --needed --root "$chrootpath" "${packages[@]}"
 
     rsync -vaRI					\
         /usr/bin/chrooted_cleaner_script.sh	\
