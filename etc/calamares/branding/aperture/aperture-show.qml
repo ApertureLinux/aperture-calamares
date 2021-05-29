@@ -12,7 +12,7 @@ Presentation
 
     Timer {
         id: advanceTimer
-        interval: 3000
+        interval: 7000
         running: presentation.activatedInCalamares
         repeat: true
         onTriggered: nextSlide()
@@ -75,6 +75,7 @@ Presentation
         }
     }
 
+
     Slide {
 
         Image {
@@ -87,6 +88,25 @@ Presentation
         Text {
             anchors.horizontalCenter: background3.horizontalCenter
             anchors.top: background3.bottom
+            text: "Please Note, Installing Packages stage will take time."
+            wrapMode: Text.WordWrap
+            width: presentation.width
+            horizontalAlignment: Text.Center
+        }
+    }
+
+    Slide {
+
+        Image {
+            id: background4
+            source: "Aperture_Linux.svg"
+            width: 500; height: 200
+            fillMode: Image.PreserveAspectFit
+            anchors.centerIn: parent
+        }
+        Text {
+            anchors.horizontalCenter: background4.horizontalCenter
+            anchors.top: background4.bottom
             text: "We Do What We Must Because We Can."
             wrapMode: Text.WordWrap
             width: presentation.width
