@@ -1,0 +1,166 @@
+
+- name: "Desktop Environment"
+  description: "Graphical User Interface Selection"
+  hidden: false
+  selected: false
+  critical: true
+  subgroups:
+    - name: "KDE Plasma"
+      description: "KDE Plasma Desktop, simple by default, a clean work area for real-world usage which intends to stay out of your way. Plasma is powerful when needed, enabling the user to create the workflow that makes them more effective to complete their tasks."
+      selected: true
+      packages:
+        - plasma-meta
+        - kde-applications-meta
+        - aperture-kde-core
+    - name: "GNOME"
+      description: "GNU Networked Object Modeling Environment Desktop"
+      selected: false
+      packages:
+        - gnome
+        - gnome-extra
+
+- name: "Drivers"
+  description: "Driver Selection"
+  hidden: false
+  selected: false
+  critical: true
+  subgroups:
+    - name: "AMD"
+      description: "AMD Graphics Drivers"
+      selected: true
+      packages:
+        - xf86-video-amdgpu
+        - mesa
+        - vulkan-radeon
+        - vulkan-icd-loader
+        - lib32-vulkan-icd-loader
+        - lib32-mesa
+    - name: "Intel"
+      description: "Intel Graphics Drivers"
+      selected: true
+      packages:
+        - xf86-video-intel
+        - mesa
+        - vulkan-intel
+        - vulkan-icd-loader
+        - lib32-vulkan-icd-loader
+        - lib32-mesa
+    - name: "Nvidia"
+      description: "Nvidia Graphics Drivers"
+      selected: true
+      packages:
+        - nvidia
+        - nvidia-utils
+        - vulkan-icd-loader
+        - lib32-vulkan-icd-loader
+    - name: "Virtual Machine Drivers"
+      description: "Virtualbox Drivers"
+      selected: false
+      packages:
+        - virtualbox-guest-utils
+        - vulkan-icd-loader
+        - lib32-vulkan-icd-loader
+
+
+- name: "Shells"
+  description: "Shells"
+  hidden: false
+  critical: true
+  subgroups:
+    - name: "Bash"
+      description: "Bourne Again Shell"
+      selected: true
+      packages:
+        - bash
+        - bash-completion
+    - name: "Zsh"
+      description: "Z Shell"
+      selected: true
+      packages:
+        - zsh
+        - zsh-completions
+    - name: "Fish"
+      description: "Friendly Interactive Shell"
+      selected: false
+      packages:
+        - fish
+# The kernel group has no checkbox, because it is immutable.
+# It can be (manually) expanded, and the packages inside it
+# will be shown, also without checkboxes. This is a way to
+# inform users that something will always be installed,
+# sort of like a hidden+selected group but visible.
+# - name: "Kernel"
+#   description: "Kernel bits"
+#   hidden: false
+#   selected: true
+#   critical: true
+#   immutable: true
+#   packages:
+#     - kernel
+#     - kernel-debugsym
+#     - kernel-nvidia
+# *selected* defaults to true for top-level
+- name: Communications
+  description: "Communications Software"
+  selected: false
+  packages:
+    - discord
+    - discord-canary
+
+# Setting *selected* is supported. Here we also show off "rich"
+# packages: ones with a package-name (for the package-manager)
+# and a description (for the human).
+- name: Editors
+  description: "Editing"
+  selected: true
+  packages:
+    - vi
+    - vim
+    - neovim
+    - emacs
+    - nano
+# The "bare" package names can be intimidating, so you can use subgroups
+# to provide human-readable names while hiding the packages themselves.
+# This also allows you you group related packages -- suppose you feel
+# that KDevelop should be installed always with PHP and Python support,
+# but that support is split into multiple packages.
+#
+# So this subgroup (IDE) contains subgroups, one for each "package"
+# we want to install. Each of those subgroups (Emacs, KDevelop)
+# in turn contains **one** bogus subgroup, which then has the list
+# of relevant packages. This extra-level-of-subgrouping allows us
+# to list packages, while giving human-readable names.
+#
+# The name of the internal subgroup doesn't matter -- it is hidden
+# from the user -- so we can give them all bogus names and
+# descriptions, even the same name. Here, we use "Bogus". You
+# can re-use the subgroup name, it doesn't really matter.
+#
+# Each internal subgroup is set to *hidden*, so it does not show up
+# as an entry in the list, and it is set to *selected*,
+# so that if you select its parent subgroup, the packages from
+# the subgroup are selected with it and get installed.
+- name: utils
+  description: "Useful Tools"
+  selected: false
+  subgroups:
+    - name: rsync
+      description: "A fast and versatile file copying tool for remote and local files"
+      packages:
+        - rsync
+    - name: SSH
+      description: "Tool for remote login"
+      packages:
+        - openssh
+    - name: Tmux
+      description: "Terminal session manager"
+      packages:
+        - tmux
+- name: IDE
+  description: "Development Environment"
+  selected: false
+  subgroups:
+    - name: Visual Studio Code
+      description: "Visual Studio Code Binary"
+      packages:
+        - visual-studio-code-bin

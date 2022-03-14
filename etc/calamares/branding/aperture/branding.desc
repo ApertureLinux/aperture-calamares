@@ -39,7 +39,8 @@ welcomeExpandingLogo:   true
 #  - "normal" or unset, expand as needed, use *windowSize*
 #  - "fullscreen", start as large as possible, ignore *windowSize*
 #  - "noexpand", don't expand automatically, use *windowSize*
-windowExpanding:    normal
+#windowExpanding:    normal
+windowExpanding:    noexpand
 
 # Size of Calamares window, expressed as w,h. Both w and h
 # may be either pixels (suffix px) or font-units (suffix em).
@@ -48,7 +49,8 @@ windowExpanding:    normal
 # This setting is ignored if "fullscreen" is selected for
 # *windowExpanding*, above. If not set, use constants defined
 # in CalamaresUtilsGui, 800x520.
-windowSize: 800px,520px
+#windowSize: 800px,520px
+windowSize: 1200px,700px
 
 # Placement of Calamares window. Either "center" or "free".
 # Whether "center" actually works does depend on the window
@@ -121,18 +123,14 @@ navigation: widget
 # are visible as buttons there if the corresponding *show* keys
 # are set to "true" (they can also be overridden).
 strings:
-    productName:         "@{NAME}"
+    productName:         Aperture Linux
     shortProductName:    Aperture
-    version:             2020.2 LTS
-    shortVersion:        2020.2
+    version:             2022.03.13
+    shortVersion:        2022.03.13
     versionedName:       Aperture Linux
     shortVersionedName:  Aperture
     bootloaderEntryName: Aperture
-    productUrl:          https://calamares.io/
-    supportUrl:          https://github.com/calamares/calamares/wiki
-    knownIssuesUrl:      https://github.com/calamares/calamares/issues
-    releaseNotesUrl:     https://calamares.io/news/
-    donateUrl:           https://kde.org/community/donations/index.php
+
 
 # These images are loaded from the branding module directory.
 #
@@ -179,11 +177,13 @@ images:
 # These colors can **also** be set through the stylesheet, if the
 # branding component also ships a stylesheet.qss. Then they are
 # the corresponding CSS attributes of #sidebarApp.
+
 style:
-   sidebarBackground:    "#292F34"
+   sidebarBackground:    "#1b2025"
    sidebarText:          "#FFFFFF"
    sidebarTextSelect:    "#292F34"
    sidebarTextHighlight: "#0099FF"
+
 
 ### SLIDESHOW
 #
