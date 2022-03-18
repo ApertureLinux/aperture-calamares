@@ -1,0 +1,6 @@
+#!/bin/bash
+haveged -w 1024
+pacman-key --init
+pkill haveged
+pacman-key --add /usr/share/pacman/keyrings/glados.gpg && sudo pacman-key --lsign-key F015C6B247D6243360B742F994EBB7A5965B9914
+pacman-key --populate

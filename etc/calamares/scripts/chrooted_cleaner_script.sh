@@ -568,21 +568,6 @@ _remove_discover(){
     _remove_a_pkg discover
 }
 
-_run_hotfix_end() {
-    local file=hotfix-end.bash
-    local type=""
-    if ! _check_internet_connection ; then
-        _is_offline_mode && type=info || type=warning
-        _c_c_s_msg $type "cannot fetch $file, no connection."
-        return
-    fi
-    local url=$(eos-github2gitlab https://raw.githubusercontent.com/endeavouros-team/ISO-hotfixes/main/$file)
-    wget --timeout=60 -q -O /tmp/$file $url && {
-        _c_c_s_msg info "running script $file"
-        bash /tmp/$file
-    }
-}
-
 ########################################
 ########## SCRIPT STARTS HERE ##########
 ########################################
@@ -596,6 +581,6 @@ _virtual_machines
 #_de_wm_config
 #_setup_personal
 _clean_up
-_run_hotfix_end
+#_run_hotfix_end
 
 rm -R /etc/calamares /opt/extra-drivers

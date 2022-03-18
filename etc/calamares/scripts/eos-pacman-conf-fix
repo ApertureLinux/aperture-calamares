@@ -19,9 +19,9 @@ Main()
     # Add EndeavourOS repo to pacman.conf.
     cat <<EOF >> pacman/pacman.conf
 
-[endeavouros]
+[glados]
 SigLevel = PackageRequired
-Include = /etc/pacman.d/endeavouros-mirrorlist
+Include = /etc/pacman.d/aperture-mirrorlist
 
 EOF
 
